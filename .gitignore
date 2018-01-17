@@ -5,3 +5,4 @@ dist
 .sass-cache
 test/bower_components
 npm-debug.log
+build

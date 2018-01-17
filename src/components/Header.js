@@ -1,16 +1,15 @@
 import React from 'react';
-
+import logo from '../css/images/online-store.svg'
 
 const Header = (props) => {
   return (
     <header className="top">
       <h1>
-        Catch
+        Good
         <span className="ofThe">
-          <span className="of">of</span>
-          <span className="the">the</span>
+          <img src={logo} alt="logo"/>
         </span>
-        Day
+        Food
       </h1>
       <h3 className="tagline"><span>{props.tagline}</span></h3>
     </header>

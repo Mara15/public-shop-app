@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFunName } from '../helpers';
+import logo from '../css/images/waiter.svg'
 
 class StorePicker extends React.Component {
   // constructor() {
@@ -8,22 +8,30 @@ class StorePicker extends React.Component {
   // }
   goToStore(event) {
     event.preventDefault();
-    console.log('You Changed the URL');
     // first grab the text from the box
     const storeId = this.storeInput.value;
-    console.log(`Going to ${storeId}`)
     // second we're going to transition from / to /store/:storeId
     this.context.router.transitionTo(`/store/${storeId}`);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.context.router.transitionTo(`/store/ArtemStore}`);
+    }, 5000)
   }
 
   render() {
     // Any where else
     return (
-      <form className="store-selector" onSubmit={(e) => this.goToStore(e)}>
-        <h2>Please Enter A Store</h2>
-        <input type="text" required placeholder="Store Name" defaultValue={getFunName()} ref={(input) => { this.storeInput = input}} />
-        <button type="submit">Visit Store →</button>
-      </form>
+      <div className="store-selector-page">
+        <form className="store-selector" onSubmit={(e) => this.goToStore(e)}>
+          <h2>Welcome to Good Food Store</h2>
+
+          <div className="img-wrap">
+            <img src={logo} alt="waiter img"/>
+          </div>
+        </form>
+      </div>
     )
   }
 }
