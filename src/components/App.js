@@ -51,6 +51,12 @@ class App extends React.Component {
     localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order));
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.context.router.transitionTo(`/store/ArtemStore`);
+    }, 0)
+  }
+
   addFish(fish) {
     // update our state
     const fishes = {...this.state.fishes};
