@@ -1,15 +1,15 @@
 import React from 'react';
 import { formatPrice } from '../helpers';
 
-class Fish extends React.Component {
+class Dish extends React.Component {
   render() {
     const { details, index } = this.props;
     const isAvailable = details.status === 'available';
     const buttonText = isAvailable ? 'Add To Order' : 'Sold Out!';
     return (
-      <li className="menu-fish">
+      <li className="menu-dish">
         <img src={details.image} alt={details.name} />
-        <h3 className="fish-name">
+        <h3 className="dish-name">
           {details.name}
           <span className="price">{formatPrice(details.price)}</span>
         </h3>
@@ -20,10 +20,10 @@ class Fish extends React.Component {
   }
 }
 
-Fish.propTypes = {
+Dish.propTypes = {
   details: React.PropTypes.object.isRequired,
   index: React.PropTypes.string.isRequired,
   addToOrder: React.PropTypes.func.isRequired
 };
 
-export default Fish;
+export default Dish;

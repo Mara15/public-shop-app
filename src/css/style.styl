@@ -50,43 +50,45 @@ header.top
       top auto
       bottom 7px
 
-
 .catch-of-the-day
-  display flex
+
   height 90vh
-  max-width:1500px
+  max-width: 1500px
   margin 0 auto
   margin-top 5vh
-  perspective: 1000px;
-  transform-style preserve-3d
+
+  @media (min-width 1200px)
+    display flex
+
   & > *
     flex 1 4 auto
     padding 2rem
-    border 1rem double lighten(black,10%)
+    border 1rem double lighten(black, 10%)
     position relative
     background white
     transition all 0.3s
-    box-shadow 0 5px 5px rgba(0,0,0,0.1)
+    box-shadow 0 5px 5px rgba(0, 0, 0, 0.1)
     overflow scroll
-    &:first-child
-      flex-shrink 1 // take 4x the extra room
-      flex-basis 50%
-      transform translateX(50%) rotateY(6deg) translateX(-50%)
-    &:nth-child(2)
-      transform translateX(-50%) rotateY(-14deg) translateX(50%)
-      border-left 0
-      border-right 0
-      min-width 300px
-    &:last-child
-      flex-shrink 1 // take 4x the extra room
-      flex-basis 50%
-      transform translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08) translateX(24px)
+
+    @media (min-width 1200px)
+      &:first-child
+        flex-shrink 1 // take 4x the extra room
+        flex-basis 50%
+
+      &:nth-child(2)
+        border-left 0
+        border-right 0
+        min-width 300px
+
+      &:last-child
+        flex-shrink 1 // take 4x the extra room
+        flex-basis 50%
 
 // Folding Transforms
 // Take off folding when not checked
 input#fold:not(:checked) ~ #main
   .catch-of-the-day > *
-      transform none
+    transform none
 
 label[for="fold"]
   position absolute
@@ -144,12 +146,13 @@ ul.order
       float left // only works if it's floated?!
       span
         display inline-block
-        // transition all 0.5s
+
+// transition all 0.5s
 
 .order-title
   text-align center
 
-.fish-edit
+.dish-edit
   margin-bottom 20px
   border 2px solid black
   overflow hidden
@@ -177,16 +180,15 @@ ul.order
     width 100%
     border 0
 
-
 // Menu Styles
-.list-of-fish
+.list-of-dish
   border-top 2px solid black
   border-bottom 1px solid black
   padding-top 5px
   margin-top 2rem
   transform translateZ(0);
 
-.menu-fish
+.menu-dish
   border-bottom 2px solid black
   border-top 1px solid black
   padding-bottom 2rem
@@ -197,7 +199,7 @@ ul.order
   p
     margin 0
     font-size 1.8rem
-  .fish-name
+  .dish-name
     margin 0
     display flex
     justify-content space-between
@@ -206,7 +208,7 @@ ul.order
     font-size 1.4rem
     // color orange
     justify-content flex-end
-    // font-family 'Open Sans Condensed'
+  // font-family 'Open Sans Condensed'
   img
     float left
     width 150px
@@ -279,7 +281,6 @@ button, input[type=submit]
     &:after
       background darken(#5EA9DD, 20%)
 
-
 // Store Selector
 .store-selector-page
   width 100%
@@ -307,3 +308,7 @@ button, input[type=submit]
   img
     max-width 100%
     width 200px
+
+.checkout-btn
+  padding 30px 0
+  text-align center

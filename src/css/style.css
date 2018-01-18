@@ -308,17 +308,17 @@ header.top h3:after {
   bottom: 7px;
 }
 .catch-of-the-day {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   height: 90vh;
   max-width: 1500px;
   margin: 0 auto;
   margin-top: 5vh;
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
+}
+@media (min-width: 1200px) {
+  .catch-of-the-day {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 .catch-of-the-day > * {
   -webkit-box-flex: 1;
@@ -332,28 +332,24 @@ header.top h3:after {
   box-shadow: 0 5px 5px rgba(0,0,0,0.1);
   overflow: scroll;
 }
-.catch-of-the-day > *:first-child {
-  -ms-flex-negative: 1;
-      flex-shrink: 1;
-  -ms-flex-preferred-size: 50%;
-      flex-basis: 50%;
-  -webkit-transform: translateX(50%) rotateY(6deg) translateX(-50%);
-          transform: translateX(50%) rotateY(6deg) translateX(-50%);
-}
-.catch-of-the-day > *:nth-child(2) {
-  -webkit-transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-          transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-  border-left: 0;
-  border-right: 0;
-  min-width: 300px;
-}
-.catch-of-the-day > *:last-child {
-  -ms-flex-negative: 1;
-      flex-shrink: 1;
-  -ms-flex-preferred-size: 50%;
-      flex-basis: 50%;
-  -webkit-transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08) translateX(24px);
-          transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08) translateX(24px);
+@media (min-width: 1200px) {
+  .catch-of-the-day > *:first-child {
+    -ms-flex-negative: 1;
+        flex-shrink: 1;
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+  }
+  .catch-of-the-day > *:nth-child(2) {
+    border-left: 0;
+    border-right: 0;
+    min-width: 300px;
+  }
+  .catch-of-the-day > *:last-child {
+    -ms-flex-negative: 1;
+        flex-shrink: 1;
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+  }
 }
 input#fold:not(:checked) ~ #main .catch-of-the-day > * {
   -webkit-transform: none;
@@ -429,7 +425,7 @@ ul.order li span.count span {
 .order-title {
   text-align: center;
 }
-.fish-edit {
+.dish-edit {
   margin-bottom: 20px;
   border: 2px solid #000;
   overflow: hidden;
@@ -439,9 +435,9 @@ ul.order li span.count span {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-.fish-edit input,
-.fish-edit textarea,
-.fish-edit select {
+.dish-edit input,
+.dish-edit textarea,
+.dish-edit select {
   width: 33.33%;
   padding: 10px;
   line-height: 1;
@@ -455,23 +451,23 @@ ul.order li span.count span {
   border-radius: 0;
   background: #fff;
 }
-.fish-edit input:focus,
-.fish-edit textarea:focus,
-.fish-edit select:focus {
+.dish-edit input:focus,
+.dish-edit textarea:focus,
+.dish-edit select:focus {
   outline: 0;
   background: #fef2de;
 }
-.fish-edit textarea {
+.dish-edit textarea {
   width: 100%;
 }
-.fish-edit input:last-of-type {
+.dish-edit input:last-of-type {
   width: 100%;
 }
-.fish-edit button {
+.dish-edit button {
   width: 100%;
   border: 0;
 }
-.list-of-fish {
+.list-of-dish {
   border-top: 2px solid #000;
   border-bottom: 1px solid #000;
   padding-top: 5px;
@@ -479,7 +475,7 @@ ul.order li span.count span {
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
 }
-.menu-fish {
+.menu-dish {
   border-bottom: 2px solid #000;
   border-top: 1px solid #000;
   padding-bottom: 2rem;
@@ -488,11 +484,11 @@ ul.order li span.count span {
   clear: both;
   overflow: hidden;
 }
-.menu-fish p {
+.menu-dish p {
   margin: 0;
   font-size: 1.8rem;
 }
-.menu-fish .fish-name {
+.menu-dish .dish-name {
   margin: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -504,13 +500,13 @@ ul.order li span.count span {
       -ms-flex-align: center;
           align-items: center;
 }
-.menu-fish .price {
+.menu-dish .price {
   font-size: 1.4rem;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
-.menu-fish img {
+.menu-dish img {
   float: left;
   width: 150px;
   margin-right: 1rem;
@@ -650,4 +646,8 @@ input[type=submit].twitter:after {
 .img-wrap img {
   max-width: 100%;
   width: 200px;
+}
+.checkout-btn {
+  padding: 30px 0;
+  text-align: center;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import AddFishForm from './AddFishForm';
+import AddDishForm from './AddDishForm';
 import base from '../base';
 
 class Inventory extends React.Component {
@@ -26,17 +26,16 @@ class Inventory extends React.Component {
   }
 
   handleChange(e, key) {
-    const fish = this.props.fishes[key];
-    // take a copy of that fish and update it with the new data
-    const updatedFish = {
-      ...fish,
+    const dish = this.props.dishes[key];
+    // take a copy of that dish and update it with the new data
+    const updatedDish = {
+      ...dish,
       [e.target.name]: e.target.value
     }
-    this.props.updateFish(key, updatedFish);
+    this.props.updateDish(key, updatedDish);
   }
 
   authenticate(provider) {
-    console.log(`Trying to log in with ${provider}`);
     base.authWithOAuthPopup(provider, this.authHandler);
   }
 
@@ -46,7 +45,6 @@ class Inventory extends React.Component {
   }
 
   authHandler(err, authData)  {
-    console.log(authData);
     if (err) {
       console.error(err);
       return;
@@ -86,20 +84,20 @@ class Inventory extends React.Component {
   }
 
   renderInventory(key) {
-    const fish = this.props.fishes[key];
+    const dish = this.props.dishes[key];
     return (
-      <div className="fish-edit" key={key}>
-        <input type="text" name="name" value={fish.name} placeholder="Fish Name" onChange={(e) => this.handleChange(e, key)} />
-        <input type="text" name="price" value={fish.price} placeholder="Fish Price"  onChange={(e) => this.handleChange(e, key)}/>
+      <div className="dish-edit" key={key}>
+        <input type="text" name="name" value={dish.name} placeholder="Dish Name" onChange={(e) => this.handleChange(e, key)} />
+        <input type="text" name="price" value={dish.price} placeholder="Dish Price"  onChange={(e) => this.handleChange(e, key)}/>
 
-        <select type="text" name="status" value={fish.status} placeholder="Fish Status" onChange={(e) => this.handleChange(e, key)}>
+        <select type="text" name="status" value={dish.status} placeholder="Dish Status" onChange={(e) => this.handleChange(e, key)}>
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
 
-        <textarea type="text" name="desc" value={fish.desc} placeholder="Fish Desc" onChange={(e) => this.handleChange(e, key)}></textarea>
-        <input type="text" name="image" value={fish.image} placeholder="Fish Image" onChange={(e) => this.handleChange(e, key)}/>
-        <button onClick={() => this.props.removeFish(key)}>Remove Fish</button>
+        <textarea type="text" name="desc" value={dish.desc} placeholder="Dish Desc" onChange={(e) => this.handleChange(e, key)}></textarea>
+        <input type="text" name="image" value={dish.image} placeholder="Dish Image" onChange={(e) => this.handleChange(e, key)}/>
+        <button onClick={() => this.props.removeDish(key)}>Remove Dish</button>
       </div>
     )
   }
@@ -126,20 +124,18 @@ class Inventory extends React.Component {
       <div>
         <h2>Inventory</h2>
         {logout}
-        {Object.keys(this.props.fishes).map(this.renderInventory)}
-        <AddFishForm addFish={this.props.addFish}/>
-        <button onClick={this.props.loadSamples}>Load Sample Fishes</button>
+        {Object.keys(this.props.dishes).map(this.renderInventory)}
+        <AddDishForm addDish={this.props.addDish}/>
       </div>
     )
   }
 
   static propTypes = {
-    fishes: React.PropTypes.object.isRequired,
-    updateFish: React.PropTypes.func.isRequired,
-    removeFish: React.PropTypes.func.isRequired,
-    addFish: React.PropTypes.func.isRequired,
-    loadSamples: React.PropTypes.func.isRequired,
-    storeId: React.PropTypes.string.isRequired
+    dishes: React.PropTypes.object.isRequired,
+    updateDish: React.PropTypes.func.isRequired,
+    removeDish: React.PropTypes.func.isRequired,
+    addDish: React.PropTypes.func.isRequired,
+    storeId: React.PropTypes.string
   };
 }
 

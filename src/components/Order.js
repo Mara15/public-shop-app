@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatPrice } from '../helpers';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import StripeCheckout from './StripeCheckout'
 
 class Order extends React.Component {
   constructor() {
@@ -8,12 +9,12 @@ class Order extends React.Component {
     this.renderOrder = this.renderOrder.bind(this);
   }
   renderOrder(key) {
-    const fish = this.props.fishes[key];
+    const dish = this.props.dishes[key];
     const count = this.props.order[key];
     const removeButton = <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>
 
-    if(!fish || fish.status === 'unavailable') {
-      return <li key={key}>Sorry, {fish ? fish.name : 'fish'} is no longer available!{removeButton}</li>
+    if(!dish || dish.status === 'unavailable') {
+      return <li key={key}>Sorry, {dish ? dish.name : 'dish'} is no longer available!{removeButton}</li>
     }
 
     return (
@@ -29,22 +30,26 @@ class Order extends React.Component {
             <span key={count}>{count}</span>
           </CSSTransitionGroup>
 
-          lbs {fish.name} {removeButton}
+          lbs {dish.name} {removeButton}
         </span>
-        <span className="price">{formatPrice(count * fish.price)}</span>
+        <span className="price">{formatPrice(count * dish.price)}</span>
 
       </li>
     )
   }
 
+  goToThankYouPage() {
+    this.context.router.transitionTo(`/thank-you`);
+  }
+
   render() {
     const orderIds = Object.keys(this.props.order);
     const total = orderIds.reduce((prevTotal, key) => {
-      const fish = this.props.fishes[key];
+      const dish = this.props.dishes[key];
       const count = this.props.order[key];
-      const isAvailable = fish && fish.status === 'available';
+      const isAvailable = dish && dish.status === 'available';
       if(isAvailable) {
-        return prevTotal + (count * fish.price || 0)
+        return prevTotal + (count * dish.price || 0)
       }
       return prevTotal;
     }, 0);
@@ -66,13 +71,51 @@ class Order extends React.Component {
           </li>
         </CSSTransitionGroup>
 
+        {
+          total > 0 && <div className="checkout-btn">
+            <StripeCheckout
+              name="GOOD FOOD" // the pop-in header title
+              description="Best dishes for you! // the pop-in header subtitle"
+              ComponentClass="div"
+              panelLabel="Give Money" // prepended to the amount in the bottom pay button
+              amount={formatPrice(total)} // cents
+              currency="USD"
+              stripeKey="..."
+              locale="pl"
+              email="marakua15@gmail.com"
+              // Note: Enabling either address option will give the user the ability to
+              // fill out both. Addresses are sent as a second parameter in the token callback.
+              shippingAddress
+              billingAddress={false}
+              // Note: enabling both zipCode checks and billing or shipping address will
+              // cause zipCheck to be pulled from billing address (set to shipping if none provided).
+              zipCode={false}
+              alipay // accept Alipay (default false)
+              bitcoin // accept Bitcoins (default false)
+              allowRememberMe // "Remember Me" option (default true)
+              token={() => this.goToThankYouPage()} // submit callback
+              opened={() => console.log('opened')} // called when the checkout popin is opened (no IE6/7)
+              closed={() => console.log('closed')} // called when the checkout popin is closed (no IE6/7)
+              // Note: `reconfigureOnUpdate` should be set to true IFF, for some reason
+              // you are using multiple stripe keys
+              reconfigureOnUpdate={false}
+              // Note: you can change the event to `onTouchTap`, `onClick`, `onTouchStart`
+              // useful if you're using React-Tap-Event-Plugin
+              triggerEvent="onTouchTap"
+            >
+              <button className="btn btn-primary">
+                Pay with card!
+              </button>
+            </StripeCheckout>
+          </div>
+        }
       </div>
     )
   }
 }
 
 Order.propTypes = {
-  fishes: React.PropTypes.object.isRequired,
+  dishes: React.PropTypes.object.isRequired,
   order: React.PropTypes.object.isRequired,
   removeFromOrder: React.PropTypes.func.isRequired,
 };

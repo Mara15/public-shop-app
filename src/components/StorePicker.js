@@ -2,12 +2,6 @@ import React from 'react';
 import logo from '../css/images/waiter.svg'
 
 class StorePicker extends React.Component {
-  componentDidMount() {
-    setTimeout(() => {
-      this.context.router.transitionTo(`/store/ArtemStore`);
-    }, 3000)
-  }
-
   render() {
     // Any where else
     return (
